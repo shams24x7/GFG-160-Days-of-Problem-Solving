@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+// Initial Template for Java
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+
+        while (t-- > 0) {
+            String arr[] = br.readLine().split(" ");
+            int prices[] = new int[arr.length];
+
+            for (int i = 0; i < arr.length; i++) {
+                prices[i] = Integer.parseInt(arr[i]);
+            }
+            Solution obj = new Solution();
+            int res = obj.maximumProfit(prices);
+            System.out.println(res);
+        }
+    }
+}
+// } Driver Code Ends
+
+// User function Template for Java
+class Solution {
+    public int maximumProfit(int prices[]) {
+        // Edge case: if the array is empty, no profit can be made
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        
+        // Initialize the minimum price to a large value and maxProfit to 0
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        
+        // Traverse through the prices array
+        for (int price : prices) {
+            // Update the minPrice if the current price is lower
+            if (price < minPrice) {
+                minPrice = price;
+            }
+            // Calculate the profit if we sell at the current price
+            int profit = price - minPrice;
+            // Update the maxProfit if the current profit is greater
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+        
+        // Return the maximum profit found
+        return maxProfit;
+    }
+}
