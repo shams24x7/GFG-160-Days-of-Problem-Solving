@@ -1,0 +1,52 @@
+//{ Driver Code Starts
+// Initial template for JAVA
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        sc.nextLine();
+        while (t > 0) {
+            String str = sc.nextLine();
+
+            Solution obj = new Solution();
+            int num = obj.myAtoi(str);
+            System.out.println(num);
+            System.out.println("~");
+            t--;
+        }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution {
+    public int myAtoi(String str) {
+        int i = 0, n = str.length();
+        while (i < n && str.charAt(i) == ' ') {
+            i++;
+        }
+
+        int sign = 1;
+        if (i < n && (str.charAt(i) == '+' || str.charAt(i) == '-')) {
+            sign = (str.charAt(i) == '-') ? -1 : 1;
+            i++;
+        }
+
+        int result = 0;
+        while (i < n && Character.isDigit(str.charAt(i))) {
+            int digit = str.charAt(i) - '0';
+
+            if (result > (Integer.MAX_VALUE - digit) / 10) {
+                return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+
+            result = result * 10 + digit;
+            i++;
+        }
+
+        return result * sign;
+    }
+}
